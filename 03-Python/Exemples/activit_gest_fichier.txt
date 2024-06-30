@@ -1,0 +1,17 @@
+with open("input.txt", 'w') as fichier:
+ fichier.write("10, 20, 30, 40, 50\n")
+# Lire les nombres à partir du fichier
+with open("input.txt", 'r') as fichier:
+ nombres = fichier.readline().split(',')
+ nombres = [int(nombre.strip()) for nombre in nombres]
+# Effectuer les opérations et sauvegarder les résultats dans un nouveau fichier
+if nombres:
+ resultats = [(nombre + 5) ** 2 for nombre in nombres]
+ try:
+ with open("output.txt", 'w') as fichier_sortie:
+ for resultat in resultats:
+ fichier_sortie.write(str(resultat) + '\n')
+ except Exception as e:
+ print("Une erreur est survenue lors de l'écriture dans le fichier de sortie:", e)
+else:
+ print("Aucun nombre à traiter.")

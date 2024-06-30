@@ -1,0 +1,23 @@
+---
+
+- name: Plabook templates
+  hosts: localhost
+  vars:
+    favourite_color: blue
+    voting_center: m2ii_mougins
+    fruits:
+      - orange
+      - pomme
+      - banane
+
+
+  vars_prompt:
+    - name: "age"
+      prompt: "How old are you ?"
+      private: no
+
+  tasks:
+    - name: template test
+      template:
+        src: templates/test.conf.j2
+        dest: /tmp/test.conf

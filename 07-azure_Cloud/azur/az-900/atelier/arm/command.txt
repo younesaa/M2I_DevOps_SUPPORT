@@ -1,0 +1,2 @@
+firstARMTemplateParams : az group deployment create -g wkl --template-file firstARMals\atelierTemolate.json --parameters storageName=storage112432 
+firstARMTemplateParamsFunctions : same

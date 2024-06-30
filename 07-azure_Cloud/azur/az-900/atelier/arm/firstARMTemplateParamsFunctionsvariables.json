@@ -1,0 +1,72 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "storageSKU": {
+            "type": "string",
+            "allowedValues": [
+            "Standard_LRS",
+            "Standard_ZRS",
+            "Standard_GRS",
+            "Standard_RAGRS",
+            "Premium_LRS"
+            ],
+            "defaultValue": "Premium_LRS",
+            "metadata": {
+            "description": "The type of replication to use for the storage account."
+            }
+        },
+        "storageName": {
+            "type": "String",
+            "metadata": {
+                "description": "Name of your storage account. Text only no space."
+            },
+            "defaultValue": "storageYounes"
+        },
+        "environment": {
+            "type": "string",
+            "allowedValues": [
+                "DEV",
+                "PROD"
+            ],
+            "defaultValue": "DEV",
+            "metadata": {
+            "description": "Define the type of environment and resource to deploy. "
+            }
+        }
+    },
+    "functions": [],
+    "variables": {
+        "suffix": "[uniqueString(resourceGroup().id)]",
+        "primeStorageName":"[toLower(concat(parameters('storageName')))]",
+        "storageInfo": {
+            "DEV": {
+                "storageSKU": "Standard_LRS",
+                "storageTier": "Standard"
+            },
+            "PROD": {
+                "storageSKU": "Premium_LRS",
+                "storageTier": "Premium"
+            }
+        },
+        "storageSKU": "[variables('storageInfo')[parameters('environment')].storageSKU]", 
+        "storageTier": "[variables('storageInfo')[parameters('environment')].storageTier]"
+    },
+    "resources": [
+        {
+            "name": "[variables('primeStorageName')]",
+            "type": "Microsoft.Storage/storageAccounts",
+            "apiVersion": "2023-01-01",
+            "tags": {
+                "displayName": "[variables('primeStorageName')]"
+            },
+            "location": "[resourceGroup().location]",
+            "kind": "StorageV2",
+            "sku": {
+                "name": "[variables('storageSKU')]",
+                "tier": "[variables('storageTier')]"
+            }
+        }
+    ],
+    "outputs": {}
+}

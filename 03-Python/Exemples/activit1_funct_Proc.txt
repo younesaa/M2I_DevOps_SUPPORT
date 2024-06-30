@@ -1,0 +1,19 @@
+def remplissage():
+ R='o'
+ while R=='o':
+ nom = input("\nEntrer le nom de l'élève ")
+ age = int(input("Entrer l'age de %s " %nom))
+ taille = float(input("Entrer la taille de %s " %nom))
+ eleves[nom]=(age,taille)
+ R=input("\nVoulez vous ajouter un autre élève. O/N? : ").lower()
+def consultation():
+ nom = input("\nEntrer le nom de l'élève à consulter ")
+ if nom in eleves:
+ age = eleves[nom][0]
+ taille = eleves[nom][1]
+ print("\nNom : %s - âge : %d ans - taille : %.2f m " %(nom,age,taille))
+ else:
+ print("l'élève %s n'existe pas!"%nom)
+eleves ={}
+remplissage()
+consultation()

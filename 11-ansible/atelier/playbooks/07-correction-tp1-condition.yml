@@ -1,0 +1,38 @@
+---
+
+- name: Installation des packages
+  hosts: all
+  gather_facts: true
+  become: true
+  tasks:
+    - name: latest httpd and firewalld
+      yum:
+        name:
+          - httpd
+          - firewalld
+        state: latest
+
+    - name: Update index cible1
+      copy:
+        content: "ceci est le serveur dev"
+        dest: /var/www/html/index.html
+      when: ansible_facts['hostname'] == "cible1"
+
+
+    - name: Update index cible2
+      copy:
+        content: "ceci est le serveur prod"
+        dest: /var/www/html/index.html
+      when: ansible_facts['hostname']  == "cible2"
+
+    - name: firewalld démarré
+      service:
+        name: httpd
+        state: started
+
+    - name: do permit traffic in default zone on port 80/tcp
+      firewalld:
+        port: 80/tcp
+        permanent: true
+        state: enabled
+        immediate: yes

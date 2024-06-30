@@ -1,0 +1,49 @@
+---
+
+- name: Installation des packages
+  hosts: all
+  gather_facts: false
+  become: true
+  tasks:
+    - name: latest httpd and firewalld
+      yum:
+        name:
+          - httpd
+          - firewalld
+        state: latest
+
+- name: Update index cible1
+  hosts: cible1
+  gather_facts: false
+  become: true
+  tasks:
+    - name: put content cible1
+      copy:
+        content: "ici c'est serveur dev"
+        dest: /var/www/html/index.html
+- name: Update index cible2
+  hosts: cible2
+  become: true
+  gather_facts: false
+  tasks:
+    - name: put content cible2
+      copy:
+        content: "ici c'est serveur prod"
+        dest: /var/www/html/index.html
+
+- name: Verification services
+  hosts: all
+  become: true
+  gather_facts: false
+  tasks:
+    - name: firewalld démarré
+      service:
+        name: httpd
+        state: started
+
+    - name: do permit traffic in default zone on port 80/tcp
+      firewalld:
+        port: 80/tcp
+        permanent: true
+        state: enabled
+        immediate: yes

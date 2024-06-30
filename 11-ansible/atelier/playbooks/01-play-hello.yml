@@ -1,0 +1,31 @@
+---
+- name: ping playbook
+  hosts: all
+  vars:
+    http_port: 80
+  tasks:
+    - name: test la connexion aux machines cibles
+      ping:
+
+    - name: afficher le contenu de http_port
+      debug:
+        msg: "le port http a pour valeur:  {{ http_port }}"
+
+    - name: afficher modt
+      command: cat /etc/motd
+    
+    - name: Copy file
+      copy:
+        src: /home/ansible/index.html
+        dest: /home/ansible
+
+- name: play affichage apres saisie
+  hosts: localhost
+  vars_prompt: 
+    - name: "name"
+      prompt: "Entrer votre nom"
+      private: no
+  tasks:
+    - name: afficher le contenu de la variable name
+      debug:
+        msg: "Bonjour {{ name }}"

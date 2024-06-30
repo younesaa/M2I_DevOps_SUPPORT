@@ -1,0 +1,25 @@
+---
+
+- name: Installation des packages
+  hosts: all
+  gather_facts: true
+  become: true
+  tasks:
+    - name: latest httpd is installed
+      yum:
+        name:
+          - httpd
+        state: latest
+
+    - name: Update indexes
+      copy:
+        content: "hello world"
+        dest: /var/www/html/index.html
+          #when: ansible_facts['hostname'] == "cible1"
+      notify: restart_httpd
+
+  handlers:
+    - name: restart_httpd
+      service:
+        name: httpd
+        state: restarted

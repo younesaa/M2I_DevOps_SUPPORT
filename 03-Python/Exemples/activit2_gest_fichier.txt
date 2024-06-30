@@ -1,0 +1,12 @@
+while True:
+	nom_fichier = input("Entrez le nom du fichier texte : ")
+ try:
+	with open(nom_fichier, 'r') as fichier:
+	lignes = fichier.readlines()
+ 	nb_lignes = len(lignes)
+ 	print("Le fichier contient", nb_lignes, "ligne(s).")
+ 	break
+ except FileNotFoundError:
+ 	print("Le fichier spécifié n'a pas été trouvé. Veuillez vérifier le nom du fichier.")
+ except Exception as e:
+ 	print("Une erreur est survenue lors de la lecture du fichier :", e)	

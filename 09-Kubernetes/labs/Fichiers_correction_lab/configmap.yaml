@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: log-config
+data:
+  log.level: WARNING
+  log.location: LOCAL

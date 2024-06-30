@@ -1,0 +1,55 @@
+
+La bibliothèque os en Python fournit un large éventail de fonctions pour interagir avec le système d'exploitation. Voici quelques-unes des fonctions les plus utilisées de la bibliothèque os :
+
+Gestion des fichiers et répertoires :
+os.path.exists(path): Vérifie si le chemin spécifié existe.
+os.listdir(path): Liste le contenu du répertoire.
+os.mkdir(path): Crée un nouveau répertoire.
+os.makedirs(path): Crée un nouveau répertoire récursivement, y compris tous les répertoires parents nécessaires.
+os.remove(path): Supprime un fichier.
+os.rmdir(path): Supprime un répertoire vide.
+os.removedirs(path): Supprime un répertoire et tous ses sous-répertoires vides.
+os.rename(src, dst): Renomme un fichier ou un répertoire.
+Gestion des chemins de fichiers :
+os.path.join(path1, path2, ...): Joindre plusieurs parties de chemin pour former un chemin complet.
+os.path.basename(path): Renvoie le nom de base d'un chemin.
+os.path.dirname(path): Renvoie le répertoire parent d'un chemin.
+os.path.abspath(path): Renvoie le chemin absolu d'un chemin spécifié.
+os.path.splitext(path): Divise le chemin en nom de fichier et extension.
+Gestion des variables d'environnement :
+os.environ: Dictionnaire contenant les variables d'environnement du système.
+os.getenv(var_name): Renvoie la valeur d'une variable d'environnement spécifiée.
+os.putenv(var_name, value): Définit la valeur d'une variable d'environnement.
+Exécution de commandes système :
+os.system(command): Exécute une commande système dans un sous-processus.
+os.spawn*(...), os.exec*(...), os.popen(...): Fonctions pour exécuter des commandes système avec différents niveaux de contrôle.
+Autres fonctionnalités :
+os.getcwd(): Renvoie le répertoire de travail actuel.
+os.chdir(path): Change le répertoire de travail actuel.
+os.getpid(): Renvoie l'identifiant du processus courant.
+os.kill(pid, signal): Envoie un signal à un processus spécifié.
+Ces fonctions de base couvrent de nombreuses opérations courantes impliquant la gestion des fichiers, des répertoires, des chemins de fichiers, des variables d'environnement et des processus dans Python. Elles sont largement utilisées pour effectuer des tâches système et d'administration sur différentes plateformes.
+
+
+*********************************************************************************************************************************************************************************************************************
+*********************************************************************************************************************************************************************************************************************
+
+La bibliothèque shutil en Python fournit des fonctions pour effectuer des opérations de haut niveau sur les fichiers et répertoires. Voici quelques-unes des fonctions les plus utilisées de la bibliothèque shutil :
+
+Copie de fichiers et répertoires :
+shutil.copy(src, dst): Copie un fichier de src vers dst.
+shutil.copy2(src, dst): Copie un fichier de src vers dst, en préservant les métadonnées du fichier d'origine.
+shutil.copyfile(src, dst): Copie le contenu d'un fichier de src vers dst.
+shutil.copytree(src, dst): Copie un répertoire récursivement, y compris tous les fichiers et sous-répertoires, de src vers dst.
+Déplacement et suppression de fichiers et répertoires :
+shutil.move(src, dst): Déplace un fichier ou un répertoire de src vers dst.
+shutil.rmtree(path): Supprime un répertoire et tout son contenu de manière récursive.
+Opérations d'archive :
+shutil.make_archive(base_name, format, root_dir): Crée une archive de root_dir et renvoie son nom de fichier. Le format de l'archive est spécifié par format (par exemple, "zip", "tar", etc.).
+shutil.unpack_archive(filename, extract_dir): Extrayez l'archive spécifiée filename dans le répertoire extract_dir.
+Opérations de comparaison de fichiers :
+shutil.cmp(file1, file2): Compare deux fichiers et renvoie True si les fichiers sont identiques, sinon False.
+Autres fonctionnalités :
+shutil.disk_usage(path): Renvoie l'utilisation du disque pour le chemin spécifié, y compris l'espace total, l'espace utilisé et l'espace disponible.
+shutil.which(cmd): Renvoie le chemin d'exécution du programme spécifié par cmd dans le chemin de recherche.
+Ces fonctions de la bibliothèque shutil facilitent grandement les opérations de manipulation de fichiers et de répertoires en Python. Elles sont utilisées pour effectuer des tâches telles que la copie, le déplacement, la suppression, la création d'archives et bien d'autres encore.

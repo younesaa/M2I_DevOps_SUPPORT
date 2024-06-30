@@ -1,0 +1,10 @@
+nombre_entier = int(input("Entrez un nombre entier n : "))
+for x in range(1,nombre_entier+1):
+    premier = True
+    for i in range(2,x):
+        #print(x,i)
+        if x%i== 0:
+            premier = False
+            
+    if premier == True:
+        print(x)

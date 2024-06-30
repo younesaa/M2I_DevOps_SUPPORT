@@ -1,0 +1,68 @@
+class Livre:
+    def __init__(self, titre, auteur, annee_pub, isbn):
+        self.titre = titre
+        self.auteur = auteur
+        self.annee_pub = annee_pub
+        self.isbn = isbn
+    
+    def __repr__(self):
+        return f"{self.titre} by {self.auteur} ({self.annee_pub})"
+
+class Membre:
+    def __init__(self, nom, num_membre):
+        self.nom = nom
+        self.num_membre = num_membre
+        self.livres_empruntes = []
+
+class Bibliotheque:
+    def __init__(self):
+        self.livres = {}  # dictionary to store books by ISBN
+
+    def ajouter_livre(self, livre):
+        self.livres[livre.isbn] = livre
+
+    def retirer_livre(self, isbn):
+        if isbn in self.livres:
+            del self.livres[isbn]
+        else:
+            print("Le livre n'existe pas dans la bibliothèque.")
+
+    def emprunter_livre(self, isbn, membre):
+        if isbn in self.livres:
+            livre = self.livres.pop(isbn) 
+            membre.livres_empruntes.append(livre)
+        else:
+            print("Le livre n'est pas disponible.")
+
+    def retourner_livre(self, livre, membre):
+        if livre in membre.livres_empruntes:
+            membre.livres_empruntes.remove(livre)
+            self.livres[livre.isbn] = livre
+        else:
+            print("Ce livre n'a pas été emprunté par ce membre.")
+
+### je fais juste d'exemples (vous pouvez les modifier)
+biblio1 =Bibliotheque()
+livre1 = Livre(titre='test', auteur='imane houbbane', annee_pub='1999', isbn='6484316555486213')
+livre2 = Livre(titre='test265', auteur='imane houbbane', annee_pub='1989', isbn='6484cdc316555486213')
+Membre1=Membre(nom='zari', num_membre='35514535468')
+biblio1.ajouter_livre(livre1)
+biblio1.ajouter_livre(livre2)
+print("Après l'ajout")
+print(list(biblio1.livres.keys()), list(biblio1.livres.values())[0].titre,list(biblio1.livres.values())[1].titre)
+print("!!!!!!!!!!!!!!!")
+biblio1.retirer_livre("6484316555486213")
+print("Après retirer")
+print(list(biblio1.livres.keys()), list(biblio1.livres.values())[0].titre)
+print("!!!!!!!!!!!!!")
+biblio1.ajouter_livre(livre1)
+biblio1.emprunter_livre("6484316555486213",Membre1)
+print("Après l'ajout et emprunt")
+print(Membre1.livres_empruntes)
+print(list(biblio1.livres.keys()), list(biblio1.livres.values())[0].titre)
+print("!!!!!!!!!!!!!!!!!!!")
+biblio1.retourner_livre(livre1,Membre1)
+print("après l emprunt")
+print(Membre1.livres_empruntes)
+print(list(biblio1.livres.keys()), list(biblio1.livres.values())[0].titre,list(biblio1.livres.values())[1].titre)
+
